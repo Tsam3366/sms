@@ -2,6 +2,7 @@ package com.example.school.Service;
 
 import com.example.school.Entity.Course;
 import com.example.school.Repository.CourseRep;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,15 @@ public class CourseService {
         return rep.save(c);
     }
 
+    @Transactional
     public void deleteCourse(int course_code){
-        rep.deleteById(course_code);
+        if(rep.findById(course_code).isPresent()){
+            int i=rep.deleteCourseForeign(course_code);
+            System.out.println(i);
+            Course temp=rep.findById(course_code).get();
+            rep.delete(temp);
+        }
+        //rep.deleteById(course_code);
     }
 
     public Course updateCourse(int course_code,Course course){

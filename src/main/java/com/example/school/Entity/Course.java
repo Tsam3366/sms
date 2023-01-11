@@ -1,14 +1,18 @@
 package com.example.school.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Date;
 import java.util.List;
 
 @Entity
 @Table
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +26,9 @@ public class Course {
     @Column
     private Date course_end;
 
-    @ManyToMany(mappedBy = "courseList")
-    private List<User> userList;
-
+//    @ManyToMany(mappedBy = "courseList")
+//    private List<User> userList;
+@ManyToMany(mappedBy = "courseList")
+private List<User> userList;
 
 }
