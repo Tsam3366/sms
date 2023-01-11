@@ -21,6 +21,7 @@ public class User {
     @Column
     private String user_pwd;
 
-//    @OneToMany(targetEntity = Course.class,cascade = CascadeType.ALL)
-//    private List<Course> reg_courses;
+    @ManyToMany(targetEntity = Course.class,cascade = CascadeType.ALL)
+    @JoinTable(name = "user_course",joinColumns = @JoinColumn(name = "user_fk",referencedColumnName = "user_id"),inverseJoinColumns = @JoinColumn(name = "course_fk",referencedColumnName = "course_code"))
+   private List<Course> courseList;
 }

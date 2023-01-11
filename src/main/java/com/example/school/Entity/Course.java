@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -20,4 +21,9 @@ public class Course {
     private Date course_start;
     @Column
     private Date course_end;
+
+    @ManyToMany(mappedBy = "courseList")
+    private List<User> userList;
+
+
 }
